@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jikim.wantedbackend.recruitment.Recruitment;
 
 import lombok.Getter;
@@ -39,5 +40,16 @@ public class Company {
 	private String location;
 
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<Recruitment> recruitments = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "Company{" +
+			"id=" + id +
+			", name='" + name + '\'' +
+			", country='" + country + '\'' +
+			", location='" + location + '\'' +
+			'}';
+	}
 }
