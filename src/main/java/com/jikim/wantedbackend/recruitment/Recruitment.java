@@ -16,14 +16,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class Recruitment {
 
 	@Id
@@ -51,4 +49,15 @@ public class Recruitment {
 	@NotNull
 	private String technology;
 
+	@Override
+	public String toString() {
+		return "Recruitment{" +
+			"id=" + id +
+			", company=" + company +
+			", position='" + position + '\'' +
+			", compensation=" + compensation +
+			", content='" + content + '\'' +
+			", technology='" + technology + '\'' +
+			'}';
+	}
 }
