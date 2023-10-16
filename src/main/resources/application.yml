@@ -6,10 +6,13 @@ spring:
     password: ENC(hstdvspZSS42bCWZ0hBskGNliLVlyo49)
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     show-sql: true
-
+  sql:
+    init:
+      mode: always
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
