@@ -2,11 +2,28 @@ package com.jikim.wantedbackend.recruitment;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import com.jikim.wantedbackend.company.Company;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class Recruitment {
 
 	@Id
@@ -14,22 +31,24 @@ public class Recruitment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "country")
-	private String country;
-
-	@Column(name = "location")
-	private String location;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "company_id")
+	private Company company;
 
 	@Column(name = "recruitment_position")
+	@NotNull
 	private String position;
 
 	@Column(name = "recruitment_compensation")
+	@NotNull
 	private Integer compensation;
 
+	@Column(name = "recruitment_content")
+	@NotNull
+	private String content;
+
 	@Column(name = "recruitment_technology")
+	@NotNull
 	private String technology;
 
 }
