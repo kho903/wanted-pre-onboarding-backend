@@ -25,7 +25,9 @@ public class ApplyService {
 
 		boolean existInRecruitmentByUserid = applyRepository.existsByUserIdAndRecruitmentId(userId, recruitmentId);
 
-		if (existInRecruitmentByUserid) throw new RuntimeException();
+		if (existInRecruitmentByUserid) {
+			throw new RuntimeException("이미 지원한 공고입니다.");
+		}
 		else {
 			Apply apply = Apply.builder()
 				.recruitment(recruitment)
