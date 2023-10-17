@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,6 +43,14 @@ public class Company {
 	@OneToMany(mappedBy = "company")
 	@JsonIgnore
 	private List<Recruitment> recruitments = new ArrayList<>();
+
+	@Builder
+	public Company(Long id, String name, String country, String location) {
+		this.id = id;
+		this.name = name;
+		this.country = country;
+		this.location = location;
+	}
 
 	@Override
 	public String toString() {
