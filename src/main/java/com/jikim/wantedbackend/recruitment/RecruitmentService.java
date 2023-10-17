@@ -1,6 +1,11 @@
 package com.jikim.wantedbackend.recruitment;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -51,5 +56,33 @@ public class RecruitmentService {
 		List<Recruitment> recruitments = recruitmentRepository.findAll();
 		return recruitments.stream()
 			.map(RecruitmentResponseDto::toResponse).toList();
+	}
+
+	public List<RecruitmentResponseDto> searchRecruitments(String search) {
+		Set<Recruitment> recruitmentSet = new HashSet<>();
+
+		if (search.chars().allMatch(Character::isDigit)) {
+			int compensation = Integer.parseInt(search);
+			List<Recruitment> findCompensation = recruitmentRepository.findByCompensationGreaterThanEqual(
+				compensation);
+			recruitmentSet.addAll(findCompensation);
+		} else {
+			Set<Company> companies = new HashSet<>();
+			companies.addAll(companyRepository.findByNameContains(search));
+			companies.addAll(companyRepository.findByCountryContains(search));
+			companies.addAll(companyRepository.findByLocationContains(search));
+
+			for (Company company : companies) {
+				recruitmentSet.addAll(recruitmentRepository.findByCompany(company));
+			}
+			recruitmentSet.addAll(recruitmentRepository.findByPositionContains(search));
+			recruitmentSet.addAll(recruitmentRepository.findByTechnologyContains(search));
+		}
+
+		List<Recruitment> recruitments = recruitmentSet.stream()
+				.sorted(Comparator.comparingLong(Recruitment::getId)).toList();
+		return recruitments.stream()
+			.map(RecruitmentResponseDto::toResponse)
+			.toList();
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
@@ -53,7 +54,8 @@ public class RecruitmentController {
 	}
 
 	@GetMapping
-	public List<RecruitmentResponseDto> getRecruitments() {
-		return recruitmentService.getRecruitments();
+	public ResponseEntity<List<RecruitmentResponseDto>> getRecruitments(@RequestParam(value = "search", required = false) String search) {
+		if (search == null) return new ResponseEntity<>(recruitmentService.getRecruitments(), HttpStatus.OK);
+		return new ResponseEntity<>(recruitmentService.searchRecruitments(search), HttpStatus.OK);
 	}
 }
