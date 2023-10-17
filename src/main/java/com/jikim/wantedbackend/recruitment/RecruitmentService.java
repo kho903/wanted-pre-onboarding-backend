@@ -1,10 +1,13 @@
 package com.jikim.wantedbackend.recruitment;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.jikim.wantedbackend.company.Company;
 import com.jikim.wantedbackend.company.CompanyRepository;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 
 import lombok.RequiredArgsConstructor;
@@ -42,5 +45,11 @@ public class RecruitmentService {
 
 	public void deleteRecruitment(Long recruitmentId) {
 		recruitmentRepository.deleteById(recruitmentId);
+	}
+
+	public List<RecruitmentResponseDto> getRecruitments() {
+		List<Recruitment> recruitments = recruitmentRepository.findAll();
+		return recruitments.stream()
+			.map(RecruitmentResponseDto::toResponse).toList();
 	}
 }
