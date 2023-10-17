@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.apply;
+package com.jikim.wantedbackend.apply.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.jikim.wantedbackend.recruitment.Recruitment;
-import com.jikim.wantedbackend.user.User;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
+import com.jikim.wantedbackend.user.entity.User;
 
 import lombok.Builder;
 import lombok.Getter;

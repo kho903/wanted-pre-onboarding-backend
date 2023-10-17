@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jikim.wantedbackend.recruitment.Recruitment;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.user;
+package com.jikim.wantedbackend.user.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.jikim.wantedbackend.apply.Apply;
+import com.jikim.wantedbackend.apply.entity.Apply;
 
 import lombok.Getter;
 

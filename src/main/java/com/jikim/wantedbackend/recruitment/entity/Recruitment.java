@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.recruitment;
+package com.jikim.wantedbackend.recruitment.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jikim.wantedbackend.apply.Apply;
-import com.jikim.wantedbackend.company.Company;
+import com.jikim.wantedbackend.apply.entity.Apply;
+import com.jikim.wantedbackend.company.entity.Company;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 
 import lombok.AllArgsConstructor;

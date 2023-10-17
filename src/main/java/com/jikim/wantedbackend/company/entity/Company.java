@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.company;
+package com.jikim.wantedbackend.company.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jikim.wantedbackend.recruitment.Recruitment;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,5 @@
-package com.jikim.wantedbackend.recruitment;
+package com.jikim.wantedbackend.recruitment.service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +8,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.jikim.wantedbackend.company.Company;
-import com.jikim.wantedbackend.company.CompanyRepository;
+import com.jikim.wantedbackend.company.entity.Company;
+import com.jikim.wantedbackend.company.repository.CompanyRepository;
+import com.jikim.wantedbackend.recruitment.repository.RecruitmentRepository;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
 import lombok.RequiredArgsConstructor;
 

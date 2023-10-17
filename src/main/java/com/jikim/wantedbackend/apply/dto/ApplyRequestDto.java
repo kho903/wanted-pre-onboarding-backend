@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.apply;
+package com.jikim.wantedbackend.apply.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

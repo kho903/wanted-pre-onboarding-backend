@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.recruitment;
+package com.jikim.wantedbackend.recruitment.controller;
 
 import java.util.List;
 
@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jikim.wantedbackend.recruitment.service.RecruitmentService;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

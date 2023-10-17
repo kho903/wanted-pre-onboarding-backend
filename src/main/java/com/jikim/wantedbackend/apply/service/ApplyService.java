@@ -1,11 +1,13 @@
-package com.jikim.wantedbackend.apply;
+package com.jikim.wantedbackend.apply.service;
 
 import org.springframework.stereotype.Service;
 
-import com.jikim.wantedbackend.recruitment.Recruitment;
-import com.jikim.wantedbackend.recruitment.RecruitmentRepository;
-import com.jikim.wantedbackend.user.User;
-import com.jikim.wantedbackend.user.UserRepository;
+import com.jikim.wantedbackend.apply.entity.Apply;
+import com.jikim.wantedbackend.apply.repository.ApplyRepository;
+import com.jikim.wantedbackend.recruitment.entity.Recruitment;
+import com.jikim.wantedbackend.recruitment.repository.RecruitmentRepository;
+import com.jikim.wantedbackend.user.entity.User;
+import com.jikim.wantedbackend.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
