@@ -27,3 +27,10 @@ insert into recruitment(`recruitment_id`, `company_id`, `recruitment_position`, 
 
 insert into recruitment(`recruitment_id`, `company_id`, `recruitment_position`, `recruitment_compensation`, `recruitment_content`, `recruitment_technology`)
  values (6, 1, '프론트엔드 개발자', 500000, '원티드랩에서 프론트엔드 시니어 개발자를 채용합니다. 자격요건은..','javascript');
+
+insert into users(`user_id`)
+ values (1);
+insert into users(`user_id`)
+ values (2);
+insert into users(`user_id`)
+ values (3);

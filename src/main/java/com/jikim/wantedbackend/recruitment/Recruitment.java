@@ -1,5 +1,8 @@
 package com.jikim.wantedbackend.recruitment;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,8 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jikim.wantedbackend.apply.Apply;
 import com.jikim.wantedbackend.company.Company;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 
@@ -49,6 +55,10 @@ public class Recruitment {
 	@Column(name = "recruitment_technology")
 	@NotNull
 	private String technology;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "recruitment")
+	private Set<Apply> applies = new HashSet<>();
 
 	public static Recruitment updateRecruitment(Recruitment recruitment, RecruitmentUpdateDto dto) {
 		recruitment.position = dto.getPosition();
