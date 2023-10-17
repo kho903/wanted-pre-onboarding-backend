@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateResponseDto;
@@ -57,5 +58,10 @@ public class RecruitmentController {
 	public ResponseEntity<List<RecruitmentResponseDto>> getRecruitments(@RequestParam(value = "search", required = false) String search) {
 		if (search == null) return new ResponseEntity<>(recruitmentService.getRecruitments(), HttpStatus.OK);
 		return new ResponseEntity<>(recruitmentService.searchRecruitments(search), HttpStatus.OK);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<RecruitmentDetailResponseDto> getRecruitment(@PathVariable Long id) {
+		return new ResponseEntity<>(recruitmentService.getRecruitment(id), HttpStatus.OK);
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jikim.wantedbackend.company.Company;
 import com.jikim.wantedbackend.company.CompanyRepository;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
@@ -84,5 +85,16 @@ public class RecruitmentService {
 		return recruitments.stream()
 			.map(RecruitmentResponseDto::toResponse)
 			.toList();
+	}
+
+	public RecruitmentDetailResponseDto getRecruitment(Long id) {
+		Recruitment recruitment = recruitmentRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("해당 채용공고가 존재하지 않습니다."));
+
+		RecruitmentDetailResponseDto response =
+			RecruitmentDetailResponseDto.toResponse(recruitment);
+		List<Recruitment> otherRecruitment = recruitmentRepository.findByCompany(recruitment.getCompany());
+		response.addRecruitmentOther(otherRecruitment.stream().map(Recruitment::getId).filter(recruitmentId -> recruitmentId != id).collect(Collectors.toList()));
+		return response;
 	}
 }
