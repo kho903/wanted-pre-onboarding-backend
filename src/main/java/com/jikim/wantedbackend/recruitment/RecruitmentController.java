@@ -2,6 +2,7 @@ package com.jikim.wantedbackend.recruitment;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,5 +40,11 @@ public class RecruitmentController {
 		RecruitmentResponseDto response = RecruitmentResponseDto.toResponse(recruitment);
 		log.info("RecruitmentController.updateRecruitment={}", response);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<HttpStatus> updateRecruitment(@PathVariable Long id) {
+		recruitmentService.deleteRecruitment(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

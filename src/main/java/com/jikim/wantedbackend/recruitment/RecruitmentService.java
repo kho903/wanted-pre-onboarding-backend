@@ -39,4 +39,8 @@ public class RecruitmentService {
 
 		return Recruitment.updateRecruitment(recruitment, updateDto);
 	}
+
+	public void deleteRecruitment(Long recruitmentId) {
+		recruitmentRepository.deleteById(recruitmentId);
+	}
 }
