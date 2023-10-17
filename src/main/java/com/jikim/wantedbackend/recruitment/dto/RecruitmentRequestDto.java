@@ -1,4 +1,4 @@
-package com.jikim.wantedbackend.recruitment;
+package com.jikim.wantedbackend.recruitment.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecruitmentDto {
+public class RecruitmentRequestDto {
 
 	@JsonProperty("company_id")
 	private Long companyId;

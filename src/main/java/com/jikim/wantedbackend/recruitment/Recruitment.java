@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import com.jikim.wantedbackend.company.Company;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,14 @@ public class Recruitment {
 	@Column(name = "recruitment_technology")
 	@NotNull
 	private String technology;
+
+	public static Recruitment updateRecruitment(Recruitment recruitment, RecruitmentUpdateDto dto) {
+		recruitment.position = dto.getPosition();
+		recruitment.compensation = dto.getCompensation();
+		recruitment.content = dto.getContent();
+		recruitment.technology = dto.getTechnology();
+		return recruitment;
+	}
 
 	@Override
 	public String toString() {
