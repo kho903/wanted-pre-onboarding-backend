@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class RecruitmentUpdateResponseDto {
+public class RecruitmentCreateUpdateResponseDto {
 
 	@JsonProperty("recruitment_id")
 	private Long id;
@@ -28,7 +28,7 @@ public class RecruitmentUpdateResponseDto {
 	private String technology;
 
 	@Builder
-	public RecruitmentUpdateResponseDto(Long id, Long companyId, String position, Integer compensation, String content,
+	public RecruitmentCreateUpdateResponseDto(Long id, Long companyId, String position, Integer compensation, String content,
 		String technology) {
 		this.id = id;
 		this.companyId = companyId;
@@ -38,8 +38,8 @@ public class RecruitmentUpdateResponseDto {
 		this.technology = technology;
 	}
 
-	public static RecruitmentUpdateResponseDto toResponse(Recruitment recruitment) {
-		return RecruitmentUpdateResponseDto.builder()
+	public static RecruitmentCreateUpdateResponseDto toResponse(Recruitment recruitment) {
+		return RecruitmentCreateUpdateResponseDto.builder()
 			.id(recruitment.getId())
 			.companyId(recruitment.getCompany().getId())
 			.position(recruitment.getPosition())

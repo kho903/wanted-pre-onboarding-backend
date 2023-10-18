@@ -18,7 +18,7 @@ import com.jikim.wantedbackend.recruitment.service.RecruitmentService;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
-import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateResponseDto;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentCreateUpdateResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 
@@ -34,18 +34,18 @@ public class RecruitmentController {
 	private final RecruitmentService recruitmentService;
 
 	@PostMapping
-	public ResponseEntity<RecruitmentUpdateResponseDto> createRecruitment(@RequestBody RecruitmentRequestDto recruitmentRequestDto) {
+	public ResponseEntity<RecruitmentCreateUpdateResponseDto> createRecruitment(@RequestBody RecruitmentRequestDto recruitmentRequestDto) {
 		Recruitment recruitment = recruitmentService.createRecruitment(recruitmentRequestDto);
-		RecruitmentUpdateResponseDto response = RecruitmentUpdateResponseDto.toResponse(recruitment);
+		RecruitmentCreateUpdateResponseDto response = RecruitmentCreateUpdateResponseDto.toResponse(recruitment);
 		log.info("RecruitmentController.createRecruitment={}", response);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RecruitmentUpdateResponseDto> updateRecruitment(@PathVariable Long id,
+	public ResponseEntity<RecruitmentCreateUpdateResponseDto> updateRecruitment(@PathVariable Long id,
 		@RequestBody RecruitmentUpdateDto recruitmentUpdateDto) {
 		Recruitment recruitment = recruitmentService.updateRecruitment(id, recruitmentUpdateDto);
-		RecruitmentUpdateResponseDto response = RecruitmentUpdateResponseDto.toResponse(recruitment);
+		RecruitmentCreateUpdateResponseDto response = RecruitmentCreateUpdateResponseDto.toResponse(recruitment);
 		log.info("RecruitmentController.updateRecruitment={}", response);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
