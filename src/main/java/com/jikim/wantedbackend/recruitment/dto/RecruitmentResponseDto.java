@@ -30,6 +30,19 @@ public class RecruitmentResponseDto {
 	@JsonProperty("recruitment_technology")
 	private String technology;
 
+	@Override
+	public String toString() {
+		return "RecruitmentResponseDto{" +
+			"id=" + id +
+			", companyName='" + companyName + '\'' +
+			", companyCountry='" + companyCountry + '\'' +
+			", companyLocation='" + companyLocation + '\'' +
+			", position='" + position + '\'' +
+			", compensation=" + compensation +
+			", technology='" + technology + '\'' +
+			'}';
+	}
+
 	@Builder
 	public RecruitmentResponseDto(Long id, String companyName, String companyCountry, String companyLocation,
 		Integer compensation, String position, String technology) {
