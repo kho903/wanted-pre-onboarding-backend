@@ -3,6 +3,8 @@ package com.jikim.wantedbackend.recruitment.service;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jikim.wantedbackend.company.entity.Company;
 import com.jikim.wantedbackend.company.repository.CompanyRepository;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 import com.jikim.wantedbackend.recruitment.entity.Recruitment;
 import com.jikim.wantedbackend.recruitment.repository.RecruitmentRepository;
@@ -145,5 +148,49 @@ class RecruitmentServiceTest {
 
 		// then
 		verify(recruitmentRepository, times(1)).deleteById(recruitmentId);
+	}
+
+	@Test
+	void getRecruitments_test() {
+	    // given
+		Company company = Company.builder()
+			.id(1L)
+			.name("원티드랩")
+			.country("한국")
+			.location("판교")
+			.build();
+
+		List<Recruitment> recruitments = new ArrayList<>();
+		for (int i = 1; i <= 10; i++) {
+			Recruitment recruitment = Recruitment.builder()
+				.id(Long.parseLong(i + ""))
+				.company(company)
+				.compensation(100000 * i)
+				.position("backend")
+				.content("주니어 백엔드 개발자 공고 " + i)
+				.technology("java")
+				.build();
+			recruitments.add(recruitment);
+		}
+		List<RecruitmentResponseDto> recruitmentResponseDtos = recruitments.stream()
+			.map(RecruitmentResponseDto::toResponse)
+			.toList();
+		when(recruitmentRepository.findAll()).thenReturn(recruitments);
+
+	    // when
+		List<RecruitmentResponseDto> responseDtos = recruitmentService.getRecruitments();
+
+		// then
+		for (int i = 0; i < 10; i++) {
+			// TODO: equals, hashcode 를 override 하는 것이 맞을까. 아니면 이렇게 하는 것이 맞을까 고민
+			// -> test 를 위해 필요 없을 것이라고 생각하는 것을 추가하는 것은 아닐 것이라고 현재 생각중.
+			assertThat(recruitmentResponseDtos.get(i).getId()).isEqualTo(responseDtos.get(i).getId());
+			assertThat(recruitmentResponseDtos.get(i).getCompanyName()).isEqualTo(responseDtos.get(i).getCompanyName());
+			assertThat(recruitmentResponseDtos.get(i).getCompanyCountry()).isEqualTo(responseDtos.get(i).getCompanyCountry());
+			assertThat(recruitmentResponseDtos.get(i).getCompanyLocation()).isEqualTo(responseDtos.get(i).getCompanyLocation());
+			assertThat(recruitmentResponseDtos.get(i).getPosition()).isEqualTo(responseDtos.get(i).getPosition());
+			assertThat(recruitmentResponseDtos.get(i).getCompensation()).isEqualTo(responseDtos.get(i).getCompensation());
+			assertThat(recruitmentResponseDtos.get(i).getTechnology()).isEqualTo(responseDtos.get(i).getTechnology());
+		}
 	}
 }
