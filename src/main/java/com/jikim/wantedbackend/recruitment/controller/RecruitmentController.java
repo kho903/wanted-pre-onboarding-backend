@@ -51,7 +51,7 @@ public class RecruitmentController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> updateRecruitment(@PathVariable Long id) {
+	public ResponseEntity<HttpStatus> deleteRecruitment(@PathVariable Long id) {
 		recruitmentService.deleteRecruitment(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
