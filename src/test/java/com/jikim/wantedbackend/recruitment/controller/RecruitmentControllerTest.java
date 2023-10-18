@@ -82,4 +82,15 @@ class RecruitmentControllerTest {
 			.andExpect(jsonPath("recruitment_technology").value(updateDto.getTechnology()))
 			.andDo(print());
 	}
+
+	@Test
+	void deleteRecruitment_test() throws Exception {
+		// given
+		Long deleteId = 1L;
+
+		// when // then
+		mockMvc.perform(MockMvcRequestBuilders.delete("/recruitment/{deleteId}",
+				Integer.parseInt(String.valueOf(deleteId))))
+			.andExpect(status().isOk());
+	}
 }
