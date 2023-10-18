@@ -1,6 +1,11 @@
 # wanted-pre-onboarding-backend
-## 요구사항 분석
-
+## 요구사항 분석 (가산점 포함 모두 구현 완료.)
+1. 채용공고 (Recruitment)를 등록
+2. 채용공고 (Recruitment)를 수정
+3. 채용공고 (Recruitment)를 삭제
+4. 채용공고 (Recruitment)를 가져오기 (검색까지)
+5. 채용 상세 페이지 가져오기
+6. 사용자는 채용공고에 지원
 
 ## 기술 스택
 - spring boot 2.7.16
