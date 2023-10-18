@@ -13,9 +13,11 @@ import com.jikim.wantedbackend.apply.entity.Apply;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
