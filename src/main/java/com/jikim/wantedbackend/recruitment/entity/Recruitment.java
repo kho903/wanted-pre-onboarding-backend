@@ -38,6 +38,7 @@ public class Recruitment {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
+	@NotNull
 	private Company company;
 
 	@Column(name = "recruitment_position")
