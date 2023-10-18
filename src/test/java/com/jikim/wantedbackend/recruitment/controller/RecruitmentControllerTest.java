@@ -1,5 +1,6 @@
 package com.jikim.wantedbackend.recruitment.controller;
 
+import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
 import com.jikim.wantedbackend.recruitment.service.RecruitmentService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -48,7 +50,7 @@ class RecruitmentControllerTest {
 
 		// when // then
 		mockMvc.perform(MockMvcRequestBuilders.post("/recruitment")
-				.contentType(MediaType.APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(requestDto)))
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("company_id").value(requestDto.getCompanyId()))
@@ -56,6 +58,28 @@ class RecruitmentControllerTest {
 			.andExpect(jsonPath("recruitment_compensation").value(requestDto.getCompensation()))
 			.andExpect(jsonPath("recruitment_content").value(requestDto.getContent()))
 			.andExpect(jsonPath("recruitment_technology").value(requestDto.getTechnology()))
+			.andDo(print());
+	}
+
+	@Test
+	void updateRecruitment_test() throws Exception {
+	    // given
+		RecruitmentUpdateDto updateDto = RecruitmentUpdateDto.builder()
+			.position("변경된 포지션")
+			.compensation(1)
+			.content("변경된 콘텐트")
+			.technology("변경된 기술")
+			.build();
+
+		// when // then
+		mockMvc.perform(MockMvcRequestBuilders.put("/recruitment/1")
+				.contentType(APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(updateDto)))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("recruitment_position").value(updateDto.getPosition()))
+			.andExpect(jsonPath("recruitment_compensation").value(updateDto.getCompensation()))
+			.andExpect(jsonPath("recruitment_content").value(updateDto.getContent()))
+			.andExpect(jsonPath("recruitment_technology").value(updateDto.getTechnology()))
 			.andDo(print());
 	}
 }
