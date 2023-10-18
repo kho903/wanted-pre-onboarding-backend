@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.jikim.wantedbackend.apply.entity.Apply;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -25,4 +26,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Apply> applies = new ArrayList<>();
 
+	@Builder
+	public User(Long id) {
+		this.id = id;
+	}
 }
