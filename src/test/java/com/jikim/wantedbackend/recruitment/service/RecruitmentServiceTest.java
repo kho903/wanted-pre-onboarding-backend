@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jikim.wantedbackend.company.entity.Company;
 import com.jikim.wantedbackend.company.repository.CompanyRepository;
+import com.jikim.wantedbackend.recruitment.dto.RecruitmentDetailResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentRequestDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentResponseDto;
 import com.jikim.wantedbackend.recruitment.dto.RecruitmentUpdateDto;
@@ -282,5 +284,65 @@ class RecruitmentServiceTest {
 			assertThat(pangyoRequestResponse.get(i).getCompensation()).isEqualTo(responsePangyo.get(i).getCompensation());
 			assertThat(pangyoRequestResponse.get(i).getTechnology()).isEqualTo(responsePangyo.get(i).getTechnology());
 		}
+	}
+
+	@Test
+	void getRecruitment_test() throws Exception {
+	    // given
+		Company company = Company.builder()
+			.id(1L)
+			.name("원티드랩")
+			.country("한국")
+			.location("판교")
+			.build();
+
+		Recruitment recruitment = Recruitment.builder()
+			.id(1L)
+			.company(company)
+			.position("backend")
+			.compensation(100000)
+			.content("주니어 백엔드 개발자 공고 ")
+			.technology("java")
+			.build();
+
+		Recruitment recruitment2 = Recruitment.builder()
+			.id(2L)
+			.company(company)
+			.position("frontend")
+			.compensation(100000)
+			.content("주니어 프론트엔드 개발자 공고 ")
+			.technology("js")
+			.build();
+
+		Recruitment recruitment3 = Recruitment.builder()
+			.id(3L)
+			.company(company)
+			.position("devops")
+			.compensation(100000)
+			.content("시니어 데브옵스 개발자 공고 ")
+			.technology("java")
+			.build();
+
+		when(recruitmentRepository.findById(1L)).thenReturn(Optional.of(recruitment));
+		when(recruitmentRepository.findByCompany(company)).thenReturn(List.of(recruitment, recruitment2, recruitment3));
+		RecruitmentDetailResponseDto detailResponseForTesting =
+			RecruitmentDetailResponseDto.toResponse(recruitment);
+		when(recruitmentRepository.findByCompany(recruitment.getCompany())).thenReturn(List.of(recruitment2, recruitment3));
+		detailResponseForTesting.addRecruitmentOther(List.of(recruitment2.getId(), recruitment3.getId()));
+
+		// when
+		RecruitmentDetailResponseDto response = recruitmentService.getRecruitment(1L);
+
+		// then
+		assertThat(detailResponseForTesting.getId()).isEqualTo(response.getId());
+		assertThat(detailResponseForTesting.getCompanyName()).isEqualTo(response.getCompanyName());
+		assertThat(detailResponseForTesting.getCompanyCountry()).isEqualTo(response.getCompanyCountry());
+		assertThat(detailResponseForTesting.getCompanyLocation()).isEqualTo(response.getCompanyLocation());
+		assertThat(detailResponseForTesting.getPosition()).isEqualTo(response.getPosition());
+		assertThat(detailResponseForTesting.getCompensation()).isEqualTo(response.getCompensation());
+		assertThat(detailResponseForTesting.getTechnology()).isEqualTo(response.getTechnology());
+		assertThat(detailResponseForTesting.getContent()).isEqualTo(response.getContent());
+		assertThat(detailResponseForTesting.getRecruitmentOther().get(0)).isEqualTo(response.getRecruitmentOther().get(0));
+		assertThat(detailResponseForTesting.getRecruitmentOther().get(1)).isEqualTo(response.getRecruitmentOther().get(1));
 	}
 }
