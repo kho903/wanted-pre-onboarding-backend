@@ -35,7 +35,7 @@ class RecruitmentServiceTest {
 
 	@Test
 	void createRecruitment_test() {
-	    // given
+		// given
 		Company company = Company.builder()
 			.id(1L)
 			.name("원티드랩")
@@ -107,5 +107,43 @@ class RecruitmentServiceTest {
 		assertThat(updateRecruitment.getCompensation()).isEqualTo(updateDto.getCompensation());
 		assertThat(updateRecruitment.getContent()).isEqualTo(updateDto.getContent());
 		assertThat(updateRecruitment.getTechnology()).isEqualTo(updateDto.getTechnology());
+	}
+
+	@Test
+	void deleteRecruitment_test() {
+		// given
+		Company company = Company.builder()
+			.id(1L)
+			.name("원티드랩")
+			.country("한국")
+			.location("판교")
+			.build();
+
+		RecruitmentRequestDto recruitmentRequestDto = RecruitmentRequestDto.builder()
+			.companyId(1L)
+			.position("백엔드 주니어 개발자")
+			.compensation(1500000)
+			.content("원티드랩에서 백엔드 주니어 개발자를 '적극' 채용합니다. 자격요건은..")
+			.technology("Python")
+			.build();
+		when(companyRepository.findById(Mockito.any(Long.class))).thenReturn(Optional.of(company));
+
+		Long recruitmentId = 1L;
+		Recruitment recruitment = Recruitment.builder()
+			.id(recruitmentId)
+			.company(company)
+			.position(recruitmentRequestDto.getPosition())
+			.compensation(recruitmentRequestDto.getCompensation())
+			.content(recruitmentRequestDto.getContent())
+			.technology(recruitmentRequestDto.getTechnology())
+			.build();
+		when(recruitmentRepository.save(Mockito.any(Recruitment.class))).thenReturn(recruitment);
+		recruitmentService.createRecruitment(recruitmentRequestDto);
+
+		// when
+		recruitmentService.deleteRecruitment(recruitmentId);
+
+		// then
+		verify(recruitmentRepository, times(1)).deleteById(recruitmentId);
 	}
 }
