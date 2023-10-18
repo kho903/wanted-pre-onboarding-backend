@@ -98,7 +98,7 @@ mysql> desc recruitment;
 | recruitment_content      | varchar(255) | NO   |     | NULL    |                |
 | recruitment_position     | varchar(255) | NO   |     | NULL    |                |
 | recruitment_technology   | varchar(255) | NO   |     | NULL    |                |
-| company_id               | bigint       | YES  | MUL | NULL    |                |
+| company_id               | bigint       | NO   | MUL | NULL    |                |
 +--------------------------+--------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
 ```
