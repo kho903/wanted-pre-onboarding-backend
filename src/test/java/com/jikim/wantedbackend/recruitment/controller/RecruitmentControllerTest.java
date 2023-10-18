@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,7 +62,7 @@ class RecruitmentControllerTest {
 
 	@Test
 	void updateRecruitment_test() throws Exception {
-	    // given
+		// given
 		RecruitmentUpdateDto updateDto = RecruitmentUpdateDto.builder()
 			.position("변경된 포지션")
 			.compensation(1)
@@ -92,5 +91,40 @@ class RecruitmentControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.delete("/recruitment/{deleteId}",
 				Integer.parseInt(String.valueOf(deleteId))))
 			.andExpect(status().isOk());
+	}
+
+	/**
+	 * TODO: 아래는 간단하게만 진행. (andExpect(status().isOk()))
+	 * 현재 data.sql 로 미리 넣어 둔 데이터로 진행했으므로 후에 리팩토링 요망.
+	 */
+	@Test
+	void getRecruitments_test() throws Exception {
+		// given
+		// when // then
+		mockMvc.perform(MockMvcRequestBuilders.get("/recruitment"))
+			.andExpect(status().isOk())
+			.andDo(print());
+	}
+
+	@Test
+	void getRecruitments_search_test() throws Exception {
+		// given
+		// when // then
+		mockMvc.perform(MockMvcRequestBuilders.get("/recruitment")
+				.param("search", "원티드"))
+			.andExpect(status().isOk())
+			.andDo(print());
+	}
+
+	@Test
+	void getRecruitment_test() throws Exception {
+		// given
+		Long recruitmentId = 1L;
+
+		// when // then
+		mockMvc.perform(MockMvcRequestBuilders.get("/recruitment/{id}",
+					Integer.parseInt(String.valueOf(recruitmentId))))
+			.andExpect(status().isOk())
+			.andDo(print());
 	}
 }
