@@ -142,3 +142,37 @@ mysql> desc apply;
 - 다음과 같이 db 설계.
 - 각 엔티티 클래스를 Recruitment, Company, User, Apply 만들고, repository 는 JPA 로 생성.
 
+## api
+- 각 api 별로 필요한 request, response dto를 따로 정의해 두었음.
+- 각 도메인별 dto 패키지 내에 존재.
+
+1. 채용공고 (Recruitment)를 등록 ("/recruitment")
+
+![](screenshot/_1CreateRecruitment.png)
+
+2. 채용공고 (Recruitment)를 수정 ("/recruitment/{id}")
+
+![](screenshot/_2UpdateRecruitment.png)
+
+3. 채용공고 (Recruitment)를 삭제 ("/recruitment/{id}")
+
+![](screenshot/_3DeleteRecruitment.png)
+
+4. 채용공고 (Recruitment)를 가져오기 (검색까지) ("/recruitment" or "/recruitment?search={키워드}")
+- /recruitment
+
+![](screenshot/_4_1GetRecruitment.png)
+
+- /recruitment?search=판교 검색
+
+![](screenshot/_4_2SearchRecruitment.png)
+
+
+5. 채용 상세 페이지 가져오기 ("/recruitment/{id}")
+
+![](screenshot/_5DetailRecruitment.png)
+
+6. 사용자는 채용공고에 지원 ("/apply")
+
+![](screenshot/_6Apply.png)
+
